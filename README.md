@@ -20,11 +20,13 @@
 ### 训练
 ```
 $ python3 train.py
+$ type cn for Chinese Data or en for English Data
 ```
 
 ### 预测
 ```
 $ python3 predict.py
+$ type cn for Chinese Data or en for English Data
 ```
 
 ### 效果
