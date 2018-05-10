@@ -45,7 +45,7 @@ for q in ['question1', 'question2']:
 # 将训练集词向量化
 embedding_dim = 300
 max_seq_length = 10
-train_df, embeddings = make_w2v_embeddings(flag, embedding_path, train_df, embedding_dim=embedding_dim, empty_w2v=True)
+train_df, embeddings = make_w2v_embeddings(flag, embedding_path, train_df, embedding_dim=embedding_dim)
 '''
 把训练数据从：
 question1   question2   is_duplicate
@@ -111,7 +111,7 @@ if __name__ == '__main__':
 
     # 超参
     batch_size = 1024
-    n_epoch = 5
+    n_epoch = 50
     n_hidden = 50
 
     left_input = Input(shape=(max_seq_length,), dtype='float32')
