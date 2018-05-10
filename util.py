@@ -93,9 +93,10 @@ def make_w2v_embeddings(flag, embedding_path, df, embedding_dim, empty_w2v=False
             if word2vec != {}:
                 tempt = []  # 增加同义词
                 for w in set(words):
-                    w_similar = word2vec.most_similar(w)[0][0]
-                    if w_similar not in words and w_similar not in tempt:
-                        tempt.append(w_similar)
+                    if w in word2vec:
+                        w_similar = word2vec.most_similar(w)[0][0]
+                        if w_similar not in words and w_similar not in tempt:
+                            tempt.append(w_similar)
                 words += tempt
 
             for word in words:
