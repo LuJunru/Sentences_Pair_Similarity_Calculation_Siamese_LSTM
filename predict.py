@@ -23,7 +23,7 @@ for q in ['question1', 'question2']:
     test_df[q + '_n'] = test_df[q]
 
 # 将测试集词向量化
-embedding_dim = 60
+embedding_dim = 300
 max_seq_length = 10
 test_df, embeddings = make_w2v_embeddings(test_df, embedding_dim=embedding_dim, empty_w2v=False)
 
@@ -57,3 +57,4 @@ if __name__ == '__main__':
         if predict_pro == Y_test[i]:
             accuracy += 1
     print(accuracy / len(Y_test))
+    
