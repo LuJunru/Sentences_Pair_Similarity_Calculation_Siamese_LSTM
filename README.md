@@ -11,7 +11,6 @@
 - 其它数据
     - 英文词向量：[GoogleNews-vectors-negative300.bin.gz](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing)
     - 英文词向量：[GoogleNews-vectors-negative300.bin.gz的百度网盘地址](https://pan.baidu.com/s/1dEENGPV)
-    - 中文词向量：[基于10G中文维基百科训练的60维词向量](https://www.cnblogs.com/Darwin2000/p/5786984.html)
     - 中文词向量：[基于120G中文语料训练的64维、128维词向量](https://weibo.com/p/23041816d74e01f0102x77v)
 - 工程参考
     - [likejazz/Siamese-LSTM](https://github.com/likejazz/Siamese-LSTM) Original author's GitHub
@@ -26,4 +25,11 @@ $ python3 train.py
 ### 预测
 ```
 $ python3 predict.py
+```
+
+### 效果
+```
+$ 根据数据比例来看，中文训练集的基准准确率应为0.78，英文为0.63
+$ 中文数据在120G语料的128维词向量上的实际训练效果为？
+$ 英文数据在GoogleNews300维词向量上的实际训练效果为0.80
 ```
