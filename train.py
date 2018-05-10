@@ -25,13 +25,13 @@ from util import make_w2v_embeddings, split_and_zero_padding, ManDist, MashiDist
 # ------------------预加载------------------ #
 
 # 读取并加载训练集
-TRAIN_CSV = './data/atec_train_segmented.csv'
+TRAIN_CSV = './data/quora_train.csv'
 train_df = pd.read_csv(TRAIN_CSV)
 for q in ['question1', 'question2']:
     train_df[q + '_n'] = train_df[q]
 
 # 将训练集词向量化
-embedding_dim = 60
+embedding_dim = 300
 max_seq_length = 10
 train_df, embeddings = make_w2v_embeddings(train_df, embedding_dim=embedding_dim, empty_w2v=False)
 '''
@@ -108,8 +108,7 @@ if __name__ == '__main__':
     left_sen_representation = shared_model(left_input)
     right_sen_representation = shared_model(right_input)
 
-    # 引入变换矩阵和马氏距离，把得到的变换concat上原始的向量再通过一个多层的DNN做了下非线性变换、sigmoid得相似度
-    # 暂时用曼哈顿距离代替马氏距离
+    # 引入曼哈顿距离，把得到的变换concat上原始的向量再通过一个多层的DNN做了下非线性变换、sigmoid得相似度
     mashi_distance = ManDist()([shared_model(left_input), shared_model(right_input)])
     sen_representation = concatenate([left_sen_representation, right_sen_representation, mashi_distance])
     similarity = Dense(1, activation='sigmoid')(Dense(2)(Dense(4)(Dense(16)(sen_representation))))
@@ -129,3 +128,4 @@ if __name__ == '__main__':
     print(str(malstm_trained.history['val_acc'][-1])[:6] +
           "(max: " + str(max(malstm_trained.history['val_acc']))[:6] + ")")
     print("Done.")
+    
