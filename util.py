@@ -80,8 +80,7 @@ def make_w2v_embeddings(df, embedding_dim, empty_w2v):  # 将词转化为词向�
     if empty_w2v:  # 若没有预训练好的词向量
         word2vec = {}
     else:
-        word2vec = KeyedVectors.load("./Word Embedding/Word60.model")  # 使用10G中文维基百科训练好的词向量
-        # 可以直接用训练集训练一个词向量。或者随机初始化词向量，然后伴随网络训练。
+        word2vec = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True)
     for index, row in df.iterrows():
         # 打印处理进度
         if index != 0 and index % 1000 == 0:
@@ -162,26 +161,4 @@ class ManDist(Layer):  # 封装成keras层的曼哈顿距离计算
     # 返回结果
     def compute_output_shape(self, input_shape):
         return K.int_shape(self.result)
-
-
-class MashiDist(Layer):  # 封装成keras层的马氏距离计算
-
-    # 初始化MashiDist层，此时不需要任何参数输入
-    def __init__(self, **kwargs):
-        self.result = None
-        super(MashiDist, self).__init__(**kwargs)
-
-    # 自动建立MashiDist层
-    def build(self, input_shape):
-        super(MashiDist, self).build(input_shape)
-
-    # 计算马氏距离
-    def call(self, x, **kwargs):
-        X = np.vstack([x[0], x[1]])
-        XT = np.transpose(X).astype(dtype='float32')
-        self.result = pdist(XT, 'mahalanobis')
-        return self.result
-
-    # 返回结果
-    def compute_output_shape(self, input_shape):
-        return K.int_shape(self.result)
+    
