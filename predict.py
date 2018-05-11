@@ -21,8 +21,8 @@ s = input("type cn or en:")
 if s == 'cn':
     TEST_CSV = './data/atec_test_segmented.csv'
     flag = 'cn'
-    embedding_path = 'CnCorpus-vectors-negative128.bin'
-    embedding_dim = 128
+    embedding_path = 'CnCorpus-vectors-negative64.bin'
+    embedding_dim = 64
     max_seq_length = 20
     savepath = './data/cn_SiameseLSTM.h5'
 else:
