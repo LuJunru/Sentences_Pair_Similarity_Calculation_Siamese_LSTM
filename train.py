@@ -42,7 +42,7 @@ else:
     savepath = './data/en_SiameseLSTM.h5'
 
 # 是否启用预训练的词向量，默认使用随机初始化的词向量
-o = input("type yes or no for choosing pre-trained w2v or not")
+o = input("type yes or no for choosing pre-trained w2v or not:")
 if o == 'yes':
     emp_o = False
 else:
