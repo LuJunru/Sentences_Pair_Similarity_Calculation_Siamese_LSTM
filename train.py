@@ -31,7 +31,7 @@ if s == 'cn':
     flag = 'cn'
     embedding_path = 'CnCorpus-vectors-negative128.bin'
     embedding_dim = 128
-    max_seq_length = 30
+    max_seq_length = 20
     savepath = './data/cn_SiameseLSTM.h5'
 else:
     TRAIN_CSV = './data/quora_train.csv'
@@ -120,7 +120,7 @@ if __name__ == '__main__':
 
     # 超参
     batch_size = 1024
-    n_epoch = 30
+    n_epoch = 5
     n_hidden = 50
 
     left_input = Input(shape=(max_seq_length,), dtype='float32')
