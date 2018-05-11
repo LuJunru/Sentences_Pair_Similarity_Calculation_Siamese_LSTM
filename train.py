@@ -41,13 +41,20 @@ else:
     max_seq_length = 10
     savepath = './data/en_SiameseLSTM.h5'
 
+# 是否启用预训练的词向量，默认使用随机初始化的词向量
+o = input("type yes or no for choosing pre-trained w2v or not")
+if o == 'yes':
+    emp_o = False
+else:
+    emp_o = True
+
 # 读取并加载训练集
 train_df = pd.read_csv(TRAIN_CSV)
 for q in ['question1', 'question2']:
     train_df[q + '_n'] = train_df[q]
 
 # 将训练集词向量化
-train_df, embeddings = make_w2v_embeddings(flag, embedding_path, train_df, embedding_dim=embedding_dim)
+train_df, embeddings = make_w2v_embeddings(flag, embedding_path, train_df, embedding_dim=embedding_dim, empty_w2v=emp_o)
 '''
 把训练数据从：
 question1   question2   is_duplicate
