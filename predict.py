@@ -33,13 +33,20 @@ else:
     max_seq_length = 10
     savepath = './data/en_SiameseLSTM.h5'
 
+# 是否启用预训练的词向量，默认使用随机初始化的词向量
+o = input("type yes or no for choosing pre-trained w2v or not")
+if o == 'yes':
+    emp_o = False
+else:
+    emp_o = True
+    
 # 读取并加载测试集
 test_df = pd.read_csv(TEST_CSV)
 for q in ['question1', 'question2']:
     test_df[q + '_n'] = test_df[q]
 
 # 将测试集词向量化
-test_df, embeddings = make_w2v_embeddings(flag, embedding_path, test_df, embedding_dim=embedding_dim)
+test_df, embeddings = make_w2v_embeddings(flag, embedding_path, test_df, embedding_dim=embedding_dim, empty_w2v=emp_o)
 
 # 预处理
 X_test = split_and_zero_padding(test_df, max_seq_length)
