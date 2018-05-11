@@ -31,6 +31,7 @@ if s == 'cn':
     flag = 'cn'
     embedding_path = 'CnCorpus-vectors-negative128.bin'
     embedding_dim = 128
+    batch_size = 128
     max_seq_length = 10
     savepath = './data/cn_SiameseLSTM.h5'
 else:
@@ -38,6 +39,7 @@ else:
     flag = 'en'
     embedding_path = 'GoogleNews-vectors-negative300.bin'
     embedding_dim = 300
+    batch_size = 1024
     max_seq_length = 10
     savepath = './data/en_SiameseLSTM.h5'
 
@@ -112,7 +114,6 @@ def shared_model(_input):
 if __name__ == '__main__':
 
     # 超参
-    batch_size = 1024
     n_epoch = 30
     n_hidden = 50
 
