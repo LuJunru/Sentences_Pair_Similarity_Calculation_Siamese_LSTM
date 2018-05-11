@@ -23,7 +23,7 @@ if s == 'cn':
     flag = 'cn'
     embedding_path = 'CnCorpus-vectors-negative128.bin'
     embedding_dim = 128
-    max_seq_length = 10
+    max_seq_length = 30
     savepath = './data/cn_SiameseLSTM.h5'
 else:
     TEST_CSV = './data/quora_test.csv'
