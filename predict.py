@@ -23,7 +23,7 @@ if s == 'cn':
     flag = 'cn'
     embedding_path = 'CnCorpus-vectors-negative128.bin'
     embedding_dim = 128
-    max_seq_length = 30
+    max_seq_length = 20
     savepath = './data/cn_SiameseLSTM.h5'
 else:
     TEST_CSV = './data/quora_test.csv'
@@ -77,4 +77,4 @@ if __name__ == '__main__':
             predict_pro = 1
         if predict_pro == Y_test[i]:
             accuracy += 1
-    print(accuracy / len(Y_test))
+    print(float(accuracy) / float(len(Y_test)))
