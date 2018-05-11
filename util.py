@@ -72,7 +72,7 @@ def make_w2v_embeddings(flag, embedding_path, df, embedding_dim, empty_w2v=False
     vocabs_not_w2v_cnt = 0  # 无法用词向量表示的词个数计数器
 
     # 停用词
-    stops = set(open('data/stopwords.txt').read().strip().split('\n'))
+    # stops = set(open('data/stopwords.txt').read().strip().split('\n'))
 
     # 加载词向量
     print("Loading word2vec model(it may takes 2-3 mins) ...")
@@ -90,18 +90,18 @@ def make_w2v_embeddings(flag, embedding_path, df, embedding_dim, empty_w2v=False
             q2n = []  # q2n -> question to numbers representation
             words = text_to_word_list(flag, row[question])
 
-            if word2vec != {}:
-                tempt = []  # 增加同义词
-                for w in set(words):
-                    if w in word2vec:
-                        w_similar = word2vec.most_similar(w)[0][0]
-                        if w_similar not in words and w_similar not in tempt:
-                            tempt.append(w_similar)
-                words += tempt
+            # if word2vec != {}:
+                # tempt = []  # 增加同义词
+                # for w in set(words):
+                    # if w in word2vec:
+                        # w_similar = word2vec.most_similar(w)[0][0]
+                        # if w_similar not in words and w_similar not in tempt:
+                            # tempt.append(w_similar)
+                # words += tempt
 
             for word in words:
-                if word in stops:  # 去停用词
-                    continue
+                # if word in stops:  # 去停用词
+                    # continue
                 if word not in word2vec and word not in vocabs_not_w2v:  # OOV的词放入不能用词向量表示的字典中，value为1
                     vocabs_not_w2v_cnt += 1
                     vocabs_not_w2v[word] = 1
