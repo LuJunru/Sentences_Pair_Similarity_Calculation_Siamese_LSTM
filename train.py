@@ -129,8 +129,8 @@ if __name__ == '__main__':
     right_sen_representation = shared_model(right_input)
 
     # 引入曼哈顿距离，把得到的变换concat上原始的向量再通过一个多层的DNN做了下非线性变换、sigmoid得相似度
-    mashi_distance = ManDist()([shared_model(left_input), shared_model(right_input)])
-    sen_representation = concatenate([left_sen_representation, right_sen_representation, mashi_distance])
+    man_distance = ManDist()([shared_model(left_input), shared_model(right_input)])
+    sen_representation = concatenate([left_sen_representation, right_sen_representation, man_distance])
     similarity = Dense(1, activation='sigmoid')(Dense(2)(Dense(4)(Dense(16)(sen_representation))))
     model = Model(inputs=[left_input, right_input], outputs=[similarity])
 
