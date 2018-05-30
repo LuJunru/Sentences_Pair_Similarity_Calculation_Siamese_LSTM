@@ -8,6 +8,7 @@
 # 基础包
 import pandas as pd
 import keras
+from gensim.models import KeyedVectors
 from util import make_w2v_embeddings, split_and_zero_padding, ManDist
 
 '''
@@ -19,7 +20,7 @@ from util import make_w2v_embeddings, split_and_zero_padding, ManDist
 # 中英文训练选择，默认使用英文训练集
 s = input("type cn or en:")
 if s == 'cn':
-    TEST_CSV = './data/atec_test_segmented.csv'
+    TEST_CSV = './data/quora_test_segmented.csv'
     flag = 'cn'
     embedding_path = 'CnCorpus-vectors-negative64.bin'
     embedding_dim = 64
@@ -36,17 +37,19 @@ else:
 # 是否启用预训练的词向量，默认使用随机初始化的词向量
 o = input("type yes or no for choosing pre-trained w2v or not:")
 if o == 'yes':
-    emp_o = False
+    # 加载词向量
+    print("Loading word2vec model(it may takes 2-3 mins) ...")
+    embedding_dict = KeyedVectors.load_word2vec_format(embedding_path, binary=True)
 else:
-    emp_o = True
-    
+    embedding_dict = {}
+
 # 读取并加载测试集
 test_df = pd.read_csv(TEST_CSV)
 for q in ['question1', 'question2']:
     test_df[q + '_n'] = test_df[q]
 
 # 将测试集词向量化
-test_df, embeddings = make_w2v_embeddings(flag, embedding_path, test_df, embedding_dim=embedding_dim, empty_w2v=emp_o)
+test_df, embeddings = make_w2v_embeddings(flag, embedding_dict, test_df, embedding_dim=embedding_dim)
 
 # 预处理
 X_test = split_and_zero_padding(test_df, max_seq_length)
@@ -77,4 +80,4 @@ if __name__ == '__main__':
             predict_pro = 1
         if predict_pro == Y_test[i]:
             accuracy += 1
-    print(float(accuracy) / float(len(Y_test)))
+    print(accuracy / len(Y_test))
