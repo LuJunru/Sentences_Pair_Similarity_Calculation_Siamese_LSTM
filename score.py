@@ -11,8 +11,6 @@ import jieba
 import keras
 from gensim.models import KeyedVectors
 from util import make_w2v_embeddings, split_and_zero_padding, ManDist
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 '''
 本配置文件用于以服务形式调用预训练好的孪生网络预测新句对的相似度
