@@ -23,9 +23,15 @@ $ python3 train.py
 $ type cn for Chinese Data or en for English Data
 ```
 
-### 预测
+### 验证
 ```
 $ python3 predict.py
+$ type cn for Chinese Data or en for English Data
+```
+
+### 预测
+```
+$ python3 score.py
 $ type cn for Chinese Data or en for English Data
 ```
 
