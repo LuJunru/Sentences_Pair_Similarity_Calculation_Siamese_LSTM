@@ -9,7 +9,6 @@
 from keras import backend as K
 from keras.layers import Layer
 from keras.preprocessing.sequence import pad_sequences
-from gensim.models import KeyedVectors
 import numpy as np
 import itertools
 
@@ -64,7 +63,7 @@ def text_to_word_list(flag, text):  # 文本分词
     return text
 
 
-def make_w2v_embeddings(flag, embedding_path, df, embedding_dim, empty_w2v=False):  # 将词转化为词向量
+def make_w2v_embeddings(flag, word2vec, df, embedding_dim):  # 将词转化为词向量
     vocabs = {}  # 词序号
     vocabs_cnt = 0  # 词个数计数器
 
@@ -74,30 +73,14 @@ def make_w2v_embeddings(flag, embedding_path, df, embedding_dim, empty_w2v=False
     # 停用词
     # stops = set(open('data/stopwords.txt').read().strip().split('\n'))
 
-    # 加载词向量
-    print("Loading word2vec model(it may takes 2-3 mins) ...")
-
-    if empty_w2v:  # 若没有预训练好的词向量
-        word2vec = {}
-    else:
-        word2vec = KeyedVectors.load_word2vec_format(embedding_path, binary=True)
     for index, row in df.iterrows():
         # 打印处理进度
         if index != 0 and index % 1000 == 0:
-            print("{:,} sentences embedded.".format(index), flush=True)
+            print(str(index) + " sentences embedded.")
 
         for question in ['question1', 'question2']:
             q2n = []  # q2n -> question to numbers representation
             words = text_to_word_list(flag, row[question])
-
-            # if word2vec != {}:
-                # tempt = []  # 增加同义词
-                # for w in set(words):
-                    # if w in word2vec:
-                        # w_similar = word2vec.most_similar(w)[0][0]
-                        # if w_similar not in words and w_similar not in tempt:
-                            # tempt.append(w_similar)
-                # words += tempt
 
             for word in words:
                 # if word in stops:  # 去停用词
