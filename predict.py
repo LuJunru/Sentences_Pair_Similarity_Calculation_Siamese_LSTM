@@ -12,7 +12,7 @@ from gensim.models import KeyedVectors
 from util import make_w2v_embeddings, split_and_zero_padding, ManDist
 
 '''
-本配置文件用于调用预训练好的孪生网络预测新句对的相似度
+本配置文件用于验证预训练好的孪生网络模型
 '''
 
 # ------------------预加载------------------ #
